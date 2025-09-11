@@ -1,45 +1,45 @@
 <main class="container-xl">
     <div id="diagnostics-block" class="my-3 p-3 rounded shadow">
-        <h6 class="border-bottom pb-2 mb-2">Diagnostics</h6>
+        <h6 class="border-bottom pb-2 mb-2">Diagnose</h6>
 
         <h3>Versions</h3>
         <div class="row">
             <div class="col-md">
                 <dl class="row">
-                    <dt class="col-sm-5">Server Installed
-                        <span class="badge bg-success d-none abbr-badge" id="server-success" title="Latest version is installed.">Ok</span>
-                        <span class="badge bg-warning text-dark d-none abbr-badge" id="server-warning" title="There seems to be an update available.">Update</span>
-                        <span class="badge bg-info text-dark d-none abbr-badge" id="server-branch" title="This is a branched version.">Branched</span>
+                    <dt class="col-sm-5">Server installiert
+                        <span class="badge bg-success d-none abbr-badge" id="server-success" title="Die neueste Version ist installiert.">Ok</span>
+                        <span class="badge bg-warning text-dark d-none abbr-badge" id="server-warning" title="Es scheint ein Update verfügbar zu sein.">Update</span>
+                        <span class="badge bg-info text-dark d-none abbr-badge" id="server-branch" title="Dies ist eine verzweigte Version.">Branched</span>
                     </dt>
                     <dd class="col-sm-7">
                         <span id="server-installed">{{page_data.current_release}}</span>
                     </dd>
-                    <dt class="col-sm-5">Server Latest
-                        <span class="badge bg-secondary d-none abbr-badge" id="server-failed" title="Unable to determine latest version.">Unknown</span>
+                    <dt class="col-sm-5">Aktuellster Server
+                        <span class="badge bg-secondary d-none abbr-badge" id="server-failed" title="Die neueste Version konnte nicht ermittelt werden.">Unbekannt</span>
                     </dt>
                     <dd class="col-sm-7">
                         <span id="server-latest">{{page_data.latest_release}}<span id="server-latest-commit" class="d-none">-{{page_data.latest_commit}}</span></span>
                     </dd>
                     {{#if page_data.web_vault_enabled}}
-                    <dt class="col-sm-5">Web Installed
-                        <span class="badge bg-success d-none abbr-badge" id="web-success" title="Latest version is installed.">Ok</span>
-                        <span class="badge bg-warning text-dark d-none abbr-badge" id="web-warning" title="There seems to be an update available.">Update</span>
-                        <span class="badge bg-info text-dark d-none abbr-badge" id="web-prerelease" title="You seem to be using a pre-release version.">Pre-Release</span>
+                    <dt class="col-sm-5">Web installiert
+                        <span class="badge bg-success d-none abbr-badge" id="web-success" title="Die neueste Version ist installiert.">Ok</span>
+                        <span class="badge bg-warning text-dark d-none abbr-badge" id="web-warning" title="Es scheint ein Update verfügbar zu sein.">Update</span>
+                        <span class="badge bg-info text-dark d-none abbr-badge" id="web-prerelease" title="Sie scheinen eine Vorabversion zu verwenden.">Pre-Release</span>
                     </dt>
                     <dd class="col-sm-7">
                         <span id="web-installed">{{page_data.web_vault_version}}</span>
                     </dd>
-                    <dt class="col-sm-5">Web Latest
-                        <span class="badge bg-secondary d-none abbr-badge" id="web-failed" title="Unable to determine latest version.">Unknown</span>
+                    <dt class="col-sm-5">Aktuellster Webclient
+                        <span class="badge bg-secondary d-none abbr-badge" id="web-failed" title="Die neueste Version konnte nicht ermittelt werden.">Unbekannt</span>
                     </dt>
                     <dd class="col-sm-7">
                         <span id="web-latest">{{page_data.latest_web_build}}</span>
                     </dd>
                     {{/if}}
                     {{#unless page_data.web_vault_enabled}}
-                    <dt class="col-sm-5">Web Installed</dt>
+                    <dt class="col-sm-5">Web installiert</dt>
                     <dd class="col-sm-7">
-                        <span id="web-installed">Web Vault is disabled</span>
+                        <span id="web-installed">Web Vault ist deaktiviert</span>
                     </dd>
                     {{/unless}}
                     <dt class="col-sm-5">Database</dt>
@@ -58,42 +58,42 @@
                     <dd class="col-sm-7">
                         <span class="d-block"><b>{{ page_data.host_os }} / {{ page_data.host_arch }}</b></span>
                     </dd>
-                    <dt class="col-sm-5">Running within a container</dt>
+                    <dt class="col-sm-5">Ausführung innerhalb eines Containers</dt>
                     <dd class="col-sm-7">
                     {{#if page_data.running_within_container}}
-                        <span class="d-block"><b>Yes (Base: {{ page_data.container_base_image }})</b></span>
+                        <span class="d-block"><b>Ja (Base: {{ page_data.container_base_image }})</b></span>
                     {{/if}}
                     {{#unless page_data.running_within_container}}
-                        <span class="d-block"><b>No</b></span>
+                        <span class="d-block"><b>Nein</b></span>
                     {{/unless}}
                     </dd>
-                    <dt class="col-sm-5">Uses config.json</dt>
+                    <dt class="col-sm-5">Verwendet config.json</dt>
                     <dd class="col-sm-7">
                     {{#if page_data.overrides}}
-                        <span class="d-inline"><b>Yes</b></span>
-                        <span class="badge bg-info text-dark abbr-badge" title="Environment variables are overwritten by a config.json.&#013;&#010;{{page_data.overrides}}">Details</span>
+                        <span class="d-inline"><b>Ja</b></span>
+                        <span class="badge bg-info text-dark abbr-badge" title="Umgebungsvariablen werden durch eine config.json überschrieben.&#013;&#010;{{page_data.overrides}}">Details</span>
                     {{/if}}
                     {{#unless page_data.overrides}}
-                        <span class="d-block"><b>No</b></span>
+                        <span class="d-block"><b>Nein</b></span>
                     {{/unless}}
                     </dd>
-                    <dt class="col-sm-5">Uses a reverse proxy</dt>
+                    <dt class="col-sm-5">Verwendet einen Reverse-Proxy</dt>
                     <dd class="col-sm-7">
                     {{#if page_data.ip_header_exists}}
-                        <span class="d-block" title="IP Header found."><b>Yes</b></span>
+                        <span class="d-block" title="IP-Header gefunden."><b>Ja</b></span>
                     {{/if}}
                     {{#unless page_data.ip_header_exists}}
-                        <span class="d-block" title="No IP Header found."><b>No</b></span>
+                        <span class="d-block" title="Kein IP-Header gefunden."><b>Nein</b></span>
                     {{/unless}}
                     </dd>
                     {{!-- Only show this if the IP Header Exists --}}
                     {{#if page_data.ip_header_exists}}
-                    <dt class="col-sm-5">IP header
+                    <dt class="col-sm-5">IP-Header
                     {{#if page_data.ip_header_match}}
-                        <span class="badge bg-success abbr-badge" title="IP_HEADER config seems to be valid.">Match</span>
+                        <span class="badge bg-success abbr-badge" title="Die IP_HEADER-Konfiguration scheint gültig zu sein.">Übereinstimmend</span>
                     {{/if}}
                     {{#unless page_data.ip_header_match}}
-                        <span class="badge bg-danger abbr-badge" title="IP_HEADER config seems to be invalid. IP's in the log could be invalid. Please fix.">No Match</span>
+                        <span class="badge bg-danger abbr-badge" title="Die IP_HEADER-Konfiguration scheint ungültig zu sein. Die IP-Adressen im Protokoll könnten ungültig sein. Bitte beheben.">Keine Übereinstimmung</span>
                     {{/unless}}
                     </dt>
                     <dd class="col-sm-7">
@@ -107,20 +107,20 @@
                     </dd>
                     {{/if}}
                     {{!-- End if IP Header Exists --}}
-                    <dt class="col-sm-5">Internet access
+                    <dt class="col-sm-5">Internetzugang
                     {{#if page_data.has_http_access}}
-                        <span class="badge bg-success abbr-badge" title="We have internet access!">Ok</span>
+                        <span class="badge bg-success abbr-badge" title="Wir haben Internetzugang!">Ok</span>
                     {{/if}}
                     {{#unless page_data.has_http_access}}
-                        <span class="badge bg-danger abbr-badge" title="There seems to be no internet access. Please fix.">Error</span>
+                        <span class="badge bg-danger abbr-badge" title="Es scheint keinen Internetzugang zu geben. Bitte beheben Sie das Problem.">Fehler</span>
                     {{/unless}}
                     </dt>
                     <dd class="col-sm-7">
                     {{#if page_data.has_http_access}}
-                        <span class="d-block"><b>Yes</b></span>
+                        <span class="d-block"><b>Ja</b></span>
                     {{/if}}
                     {{#unless page_data.has_http_access}}
-                        <span class="d-block"><b>No</b></span>
+                        <span class="d-block"><b>Nein</b></span>
                     {{/unless}}
                     </dd>
                     <dt class="col-sm-5">Internet access via a proxy</dt>
