@@ -1,0 +1,237 @@
+<main class="container-xl">
+    <div id="diagnostics-block" class="my-3 p-3 rounded shadow">
+        <h6 class="border-bottom pb-2 mb-2">Diagnose</h6>
+
+        <h3>Versionen</h3>
+        <div class="row">
+            <div class="col-md">
+                <dl class="row">
+                    <dt class="col-sm-5">Server installiert
+                        <span class="badge bg-success d-none abbr-badge" id="server-success" title="Die neueste Version ist installiert.">Ok</span>
+                        <span class="badge bg-warning text-dark d-none abbr-badge" id="server-warning" title="Es scheint ein Update verfügbar zu sein.">Update</span>
+                        <span class="badge bg-info text-dark d-none abbr-badge" id="server-branch" title="Dies ist eine verzweigte Version.">Verzweigt</span>
+                    </dt>
+                    <dd class="col-sm-7">
+                        <span id="server-installed">{{page_data.current_release}}</span>
+                    </dd>
+                    <dt class="col-sm-5">Aktuellster Server
+                        <span class="badge bg-secondary d-none abbr-badge" id="server-failed" title="Die neueste Version konnte nicht ermittelt werden.">Unbekannt</span>
+                    </dt>
+                    <dd class="col-sm-7">
+                        <span id="server-latest">{{page_data.latest_release}}<span id="server-latest-commit" class="d-none">-{{page_data.latest_commit}}</span></span>
+                    </dd>
+                    {{#if page_data.web_vault_enabled}}
+                    <dt class="col-sm-5">Web installiert
+                        <span class="badge bg-success d-none abbr-badge" id="web-success" title="Die neueste Version ist installiert.">Ok</span>
+                        <span class="badge bg-warning text-dark d-none abbr-badge" id="web-warning" title="Es scheint ein Update verfügbar zu sein.">Update</span>
+                        <span class="badge bg-info text-dark d-none abbr-badge" id="web-prerelease" title="Du verwendest eine Vorabversion.">Pre-Release</span>
+                    </dt>
+                    <dd class="col-sm-7">
+                        <span id="web-installed">{{page_data.web_vault_version}}</span>
+                    </dd>
+                    <dt class="col-sm-5">Aktuellster Webclient
+                        <span class="badge bg-secondary d-none abbr-badge" id="web-failed" title="Die neueste Version konnte nicht ermittelt werden.">Unbekannt</span>
+                    </dt>
+                    <dd class="col-sm-7">
+                        <span id="web-latest">{{page_data.latest_web_build}}</span>
+                    </dd>
+                    {{/if}}
+                    {{#unless page_data.web_vault_enabled}}
+                    <dt class="col-sm-5">Web installiert</dt>
+                    <dd class="col-sm-7">
+                        <span id="web-installed">Web Vault ist deaktiviert</span>
+                    </dd>
+                    {{/unless}}
+                    <dt class="col-sm-5">Datenbank</dt>
+                    <dd class="col-sm-7">
+                        <span><b>{{page_data.db_type}}:</b> {{page_data.db_version}}</span>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+
+        <h3>Prüfungen</h3>
+        <div class="row">
+            <div class="col-md">
+                <dl class="row">
+                    <dt class="col-sm-5">Betriebssystem/Architektur</dt>
+                    <dd class="col-sm-7">
+                        <span class="d-block"><b>{{ page_data.host_os }} / {{ page_data.host_arch }}</b></span>
+                    </dd>
+                    <dt class="col-sm-5">Läuft innerhalb eines Containers</dt>
+                    <dd class="col-sm-7">
+                    {{#if page_data.running_within_container}}
+                        <span class="d-block"><b>Ja (Basis: {{ page_data.container_base_image }})</b></span>
+                    {{/if}}
+                    {{#unless page_data.running_within_container}}
+                        <span class="d-block"><b>Nein</b></span>
+                    {{/unless}}
+                    </dd>
+                    <dt class="col-sm-5">Verwendet config.json</dt>
+                    <dd class="col-sm-7">
+                    {{#if page_data.overrides}}
+                        <span class="d-inline"><b>Ja</b></span>
+                        <span class="badge bg-info text-dark abbr-badge" title="Umgebungsvariablen werden durch eine config.json überschrieben.&#013;&#010;{{page_data.overrides}}">Details</span>
+                    {{/if}}
+                    {{#unless page_data.overrides}}
+                        <span class="d-block"><b>Nein</b></span>
+                    {{/unless}}
+                    </dd>
+                    <dt class="col-sm-5">Verwendet einen Reverse-Proxy</dt>
+                    <dd class="col-sm-7">
+                    {{#if page_data.ip_header_exists}}
+                        <span class="d-block" title="IP-Header gefunden."><b>Ja</b></span>
+                    {{/if}}
+                    {{#unless page_data.ip_header_exists}}
+                        <span class="d-block" title="Kein IP-Header gefunden."><b>Nein</b></span>
+                    {{/unless}}
+                    </dd>
+                    {{#if page_data.ip_header_exists}}
+                    <dt class="col-sm-5">IP-Header
+                    {{#if page_data.ip_header_match}}
+                        <span class="badge bg-success abbr-badge" title="Die IP_HEADER-Konfiguration scheint gültig zu sein.">Übereinstimmend</span>
+                    {{/if}}
+                    {{#unless page_data.ip_header_match}}
+                        <span class="badge bg-danger abbr-badge" title="Die IP_HEADER-Konfiguration scheint ungültig zu sein. Die IP-Adressen im Protokoll könnten ungültig sein. Bitte beheben.">Keine Übereinstimmung</span>
+                    {{/unless}}
+                    </dt>
+                    <dd class="col-sm-7">
+                    {{#if page_data.ip_header_match}}
+                        <span class="d-block"><b>Config/Server:</b> {{ page_data.ip_header_name }}</span>
+                    {{/if}}
+                    {{#unless page_data.ip_header_match}}
+                        <span class="d-block"><b>Config:</b> {{ page_data.ip_header_config }}</span>
+                        <span class="d-block"><b>Server:</b> {{ page_data.ip_header_name }}</span>
+                    {{/unless}}
+                    </dd>
+                    {{/if}}
+                    <dt class="col-sm-5">Internetzugang
+                    {{#if page_data.has_http_access}}
+                        <span class="badge bg-success abbr-badge" title="Wir haben Internetzugang!">Ok</span>
+                    {{/if}}
+                    {{#unless page_data.has_http_access}}
+                        <span class="badge bg-danger abbr-badge" title="Es scheint keinen Internetzugang zu geben. Bitte behebe das Problem.">Fehler</span>
+                    {{/unless}}
+                    </dt>
+                    <dd class="col-sm-7">
+                    {{#if page_data.has_http_access}}
+                        <span class="d-block"><b>Ja</b></span>
+                    {{/if}}
+                    {{#unless page_data.has_http_access}}
+                        <span class="d-block"><b>Nein</b></span>
+                    {{/unless}}
+                    </dd>
+                    <dt class="col-sm-5">Internetzugang über Proxy</dt>
+                    <dd class="col-sm-7">
+                    {{#if page_data.uses_proxy}}
+                        <span class="d-block" title="Der Internetzugang erfolgt über einen Proxy (HTTPS_PROXY oder HTTP_PROXY konfiguriert)."><b>Ja</b></span>
+                    {{/if}}
+                    {{#unless page_data.uses_proxy}}
+                        <span class="d-block" title="Wir haben direkten Internetzugang, kein Proxy konfiguriert."><b>Nein</b></span>
+                    {{/unless}}
+                    </dd>
+                    <dt class="col-sm-5">Websocket aktiviert
+                        {{#if page_data.enable_websocket}}
+                        <span class="badge bg-success d-none abbr-badge" id="websocket-success" title="Websocket-Verbindung funktioniert.">Ok</span>
+                        <span class="badge bg-danger d-none abbr-badge" id="websocket-error" title="Websocket-Verbindungsfehler, überprüfe deine Reverse-Proxy-Konfiguration!">Fehler</span>
+                        {{/if}}
+                    </dt>
+                    <dd class="col-sm-7">
+                    {{#if page_data.enable_websocket}}
+                        <span class="d-block" title="Websocket-Verbindungen sind aktiviert (ENABLE_WEBSOCKET ist true)."><b>Ja</b></span>
+                    {{/if}}
+                    {{#unless page_data.enable_websocket}}
+                        <span class="d-block" title="Websocket-Verbindungen sind deaktiviert (ENABLE_WEBSOCKET ist false)."><b>Nein</b></span>
+                    {{/unless}}
+                    </dd>
+
+                    <dt class="col-sm-5">DNS (github.com)
+                        <span class="badge bg-success d-none abbr-badge" id="dns-success" title="DNS-Auflösung funktioniert!">Ok</span>
+                        <span class="badge bg-danger d-none abbr-badge" id="dns-warning" title="DNS-Auflösung fehlgeschlagen. Bitte behebe es.">Fehler</span>
+                    </dt>
+                    <dd class="col-sm-7">
+                        <span id="dns-resolved">{{page_data.dns_resolved}}</span>
+                    </dd>
+                    <dt class="col-sm-5">Datum & Uhrzeit (Lokal)
+                        {{#if page_data.tz_env}}
+                            <span class="badge bg-success abbr-badge" title="Konfigurierte TZ-Umgebungsvariable">{{page_data.tz_env}}</span>
+                        {{/if}}
+                    </dt>
+                    <dd class="col-sm-7">
+                        <span><b>Server:</b> {{page_data.server_time_local}}</span>
+                    </dd>
+                    <dt class="col-sm-5">Datum & Uhrzeit (UTC)
+                        <span class="badge bg-success d-none abbr-badge" id="time-success" title="Server- und Browserzeit liegen innerhalb von 15 Sekunden auseinander.">Server/Browser Ok</span>
+                        <span class="badge bg-danger d-none abbr-badge" id="time-warning" title="Server- und Browserzeit liegen mehr als 15 Sekunden auseinander.">Server/Browser Fehler</span>
+                        <span class="badge bg-success d-none abbr-badge" id="ntp-server-success" title="Server- und NTP-Zeit liegen innerhalb von 15 Sekunden auseinander.">Server NTP Ok</span>
+                        <span class="badge bg-danger d-none abbr-badge" id="ntp-server-warning" title="Server- und NTP-Zeit liegen mehr als 15 Sekunden auseinander.">Server NTP Fehler</span>
+                        <span class="badge bg-success d-none abbr-badge" id="ntp-browser-success" title="Browser- und NTP-Zeit liegen innerhalb von 15 Sekunden auseinander.">Browser NTP Ok</span>
+                        <span class="badge bg-danger d-none abbr-badge" id="ntp-browser-warning" title="Browser- und NTP-Zeit liegen mehr als 15 Sekunden auseinander.">Browser NTP Fehler</span>
+                    </dt>
+                    <dd class="col-sm-7">
+                        <span id="ntp-time" class="d-block"><b>NTP:</b> <span id="ntp-server-string">{{page_data.ntp_time}}</span></span>
+                        <span id="time-server" class="d-block"><b>Server:</b> <span id="time-server-string">{{page_data.server_time}}</span></span>
+                        <span id="time-browser" class="d-block"><b>Browser:</b> <span id="time-browser-string"></span></span>
+                    </dd>
+
+                    <dt class="col-sm-5">Domain-Konfiguration
+                        <span class="badge bg-success d-none abbr-badge" id="domain-success" title="Die Domain-Variable stimmt mit der Browser-Adresse überein und scheint korrekt konfiguriert zu sein.">Übereinstimmung</span>
+                        <span class="badge bg-danger d-none abbr-badge" id="domain-warning" title="Die Domain-Variable stimmt nicht mit der Browser-Adresse überein.&#013;&#010;Die Domain-Variable scheint nicht korrekt konfiguriert zu sein.&#013;&#010;Einige Funktionen könnten nicht wie erwartet funktionieren!">Keine Übereinstimmung</span>
+                        <span class="badge bg-success d-none abbr-badge" id="https-success" title="HTTPS ist konfiguriert">HTTPS</span>
+                        <span class="badge bg-danger d-none abbr-badge" id="https-warning" title="HTTPS ist nicht konfiguriert.&#013;&#010;Einige Funktionen könnten nicht wie erwartet funktionieren!">Kein HTTPS</span>
+                    </dt>
+                    <dd class="col-sm-7">
+                        <span id="domain-server" class="d-block"><b>Server:</b> <span id="domain-server-string">{{page_data.admin_url}}</span></span>
+                        <span id="domain-browser" class="d-block"><b>Browser:</b> <span id="domain-browser-string"></span></span>
+                    </dd>
+
+                    <dt class="col-sm-5">HTTP-Antwortprüfung
+                        <span class="badge bg-success d-none abbr-badge" id="http-response-success" title="Alle Header und HTTP-Anfragen scheinen in Ordnung zu sein.">Ok</span>
+                        <span class="badge bg-danger d-none abbr-badge" id="http-response-warning" title="Einige Header oder HTTP-Antworten enthalten ungültige Daten!">Fehler</span>
+                    </dt>
+                    <dd class="col-sm-7">
+                        <span id="http-response-errors" class="d-block"></span>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+
+        <h3>Support</h3>
+        <div class="row">
+            <div class="col-md">
+                <dl class="row">
+                    <dd class="col-sm-12">
+                        Wenn du Unterstützung benötigst, überprüfe bitte zuerst die folgenden Links, bevor du ein neues Issue erstellst:
+                         <a href="https://vaultwarden.discourse.group/" target="_blank" rel="noreferrer noopener">Vaultwarden Forum</a>
+                         | <a href="https://github.com/dani-garcia/vaultwarden/discussions" target="_blank" rel="noreferrer noopener">Github Discussions</a>
+                    </dd>
+                </dl>
+                <dl class="row">
+                    <dd class="col-sm-12">
+                        Du kannst den Button unten verwenden, um einen Support-String vorab zu generieren, den du im Forum oder bei der Erstellung eines neuen Issues auf Github kopieren/einfügen kannst.<br>
+                        Wir versuchen standardmäßig, die sensibelsten Werte aus dem generierten Support-String auszublenden. Bitte prüfe dennoch, ob nichts enthalten ist, was du verbergen möchtest!<br>
+                    </dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-sm-3">
+                        <button type="button" id="gen-support" class="btn btn-primary">Support-String generieren</button>
+                        <br><br>
+                        <button type="button" id="copy-support" class="btn btn-info mb-3 d-none">In die Zwischenablage kopieren</button>
+                        <div class="toast-container position-absolute float-start vw-copy-toast">
+                            <div id="toastClipboardCopy" class="toast fade hide" role="status" aria-live="polite" aria-atomic="true" data-bs-autohide="true" data-bs-delay="1500">
+                                <div class="toast-body">
+                                    In die Zwischenablage kopiert!
+                                </div>
+                            </div>
+                        </div>
+                    </dt>
+                    <dd class="col-sm-9">
+                        <pre id="support-string" class="pre-scrollable d-none w-100 border p-2"></pre>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="{{urlpath}}/vw_static/admin_diagnostics.js"></script>
+<script type="application/json" id="diagnostics_json">{{to_json page_data}}</script>
