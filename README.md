@@ -1,11 +1,11 @@
 # Vaultwarden German Admin
 
-![GitHub Repo stars](https://mini-badges.rondevhub.de/github/RonDevHub/vaultwarden-lang-de/created_at) ![GitHub Repo stars](https://mini-badges.rondevhub.de/github/RonDevHub/vaultwarden-lang-de/stars) ![GitHub Repo stars](https://mini-badges.rondevhub.de/github/RonDevHub/vaultwarden-lang-de/issues) ![GitHub Repo language](https://mini-badges.rondevhub.de/github/RonDevHub/vaultwarden-lang-de/top_language) ![GitHub Repo license](https://mini-badges.rondevhub.de/github/RonDevHub/vaultwarden-lang-de/license) ![GitHub Repo release](https://mini-badges.rondevhub.de/github/RonDevHub/Mini-Badges/forks) ![GitHub Repo stars](https://mini-badges.rondevhub.de/github/RonDevHub/vaultwarden-lang-de/watchers) ![GitHub Repo stars](https://mini-badges.rondevhub.de/github/RonDevHub/vaultwarden-lang-de/commit-info)
+![GitHub Repo stars](https://mini-badges.rondevhub.de/github/RonDevHub/vaultwarden-lang-de/created_at/social) ![GitHub Repo stars](https://mini-badges.rondevhub.de/github/RonDevHub/vaultwarden-lang-de/stars/social) ![GitHub Repo stars](https://mini-badges.rondevhub.de/github/RonDevHub/vaultwarden-lang-de/issues/social) ![GitHub Repo language](https://mini-badges.rondevhub.de/github/RonDevHub/vaultwarden-lang-de/top_language/social) ![GitHub Repo license](https://mini-badges.rondevhub.de/github/RonDevHub/vaultwarden-lang-de/license/social) ![GitHub Repo release](https://mini-badges.rondevhub.de/github/RonDevHub/Mini-Badges/forks/social) ![GitHub Repo stars](https://mini-badges.rondevhub.de/github/RonDevHub/vaultwarden-lang-de/watchers/social) ![GitHub Repo stars](https://mini-badges.rondevhub.de/github/RonDevHub/vaultwarden-lang-de/commit-info/social)
 
-[![Buy me a coffee](https://mini-badges.rondevhub.de/icon/cuptogo/Buy_me_a_Coffee-c1d82f-222/flat "Buy me a coffee")](https://www.buymeacoffee.com/RonDev)
-[![Buy me a coffee](https://mini-badges.rondevhub.de/icon/cuptogo/ko--fi.com-c1d82f-222/flat "Buy me a coffee")](https://ko-fi.com/U6U31EV2VS)
-[![Sponsor me](https://mini-badges.rondevhub.de/icon/hearts-red/Sponsor_me/flat "Sponsor me")](https://github.com/sponsors/RonDevHub)
-[![Pizza Power](https://mini-badges.rondevhub.de/icon/pizzaslice/Buy_me_a_pizza/flat "Pizza Power")](https://www.paypal.com/paypalme/Depressionist1/4,99)
+[![Buy me a coffee](https://mini-badges.rondevhub.de/icon/cuptogo/Buy_me_a_Coffee-c1d82f-222/for-the-badge "Buy me a coffee")](https://www.buymeacoffee.com/RonDev)
+[![Buy me a coffee](https://mini-badges.rondevhub.de/icon/cuptogo/ko--fi.com-c1d82f-222/for-the-badge "Buy me a coffee")](https://ko-fi.com/U6U31EV2VS)
+[![Sponsor me](https://mini-badges.rondevhub.de/icon/hearts-red/Sponsor_me/for-the-badge "Sponsor me")](https://github.com/sponsors/RonDevHub)
+[![Pizza Power](https://mini-badges.rondevhub.de/icon/pizzaslice/Buy_me_a_pizza/for-the-badge "Pizza Power")](https://www.paypal.com/paypalme/Depressionist1/4,99)
 ---
 Dies ist die **deutsche Übersetzung** der Admin-Vorlagen von [Vaultwarden](https://github.com/dani-garcia/vaultwarden), die im Verzeichnis `src/static/templates/admin` zu finden sind.  
 
